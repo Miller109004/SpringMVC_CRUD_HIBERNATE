@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о пользователе</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .user-details {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .user-details label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .user-details span {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Информация о пользователе</h1>
+<div class="user-details" th:if="${user != null}">
+    <label>Имя:</label>
+    <span th:text="${user.name}">Имя пользователя</span>
+    <label>Фамилия:</label>
+    <span th:text="${user.surname}">Фамилия пользователя</span>
+    <label>Возраст:</label>
+    <span th:text="${user.age}">Возраст пользователя</span>
+    <label>Почта:</label>
+    <span th:text="${user.email}">Почта пользователя</span>
+</div>
+<a href="/users">Назад к списку пользователей</a>
+</body>
+</html>

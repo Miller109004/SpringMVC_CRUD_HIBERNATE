@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003d80;
+        }
+        form {
+            display: inline;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+
+<div th:if="${users != null}">
+    <h2>Пользователи</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Почта</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <a th:href="@{/users/byid(id=${user.id})}">Информация</a>
+                <form th:action="@{/users/delete}" method="post" style="display:inline;">
+                    <input type="hidden" th:value="${user.id}" name="id"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="addForm" class="form-container" th:if="${user != null}">
+    <h2>Добавить пользователя</h2>
+    <form th:action="@{/users/add}" th:object="${user}" method="post">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <label for="surname">Фамилия:</label>
+        <input type="text" id="surname" th:field="*{surname}" />
+        <label for="age">Возраст:</label>
+        <input type="text" id="age" th:field="*{age}" />
+        <label for="email">Почта:</label>
+        <input type="text" id="email" th:field="*{email}" />
+        <button type="submit">Сохранить</button>
+    </form>
+    <a href="/users">Назад</a>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        document.getElementById('addForm').style.display = 'none';
+        document.getElementById('userList').style.display = 'none';
+        document.getElementById(sectionId).style.display = 'block';
+    }
+</script>
+</body>
+</html>

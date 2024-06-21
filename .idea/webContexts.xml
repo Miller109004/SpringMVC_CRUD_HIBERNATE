@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/addFrom.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages/users.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/pages" />
+        <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/view/allUsers.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/view" />
+        <entry key="file://$PROJECT_DIR$/src/webapp/WEB-INF/view/user.html" value="file://$PROJECT_DIR$/src/webapp/WEB-INF/view" />
+      </map>
+    </option>
+  </component>
+</project>
