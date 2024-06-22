@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Пользователи</title>
     <style>
         body {
@@ -65,8 +66,6 @@
     </style>
 </head>
 <body>
-
-
 <div th:if="${users != null}">
     <h2>Пользователи</h2>
     <table>
@@ -88,7 +87,7 @@
             <td th:text="${user.age}"></td>
             <td th:text="${user.email}"></td>
             <td>
-                <a th:href="@{/users/byid(id=${user.id})}">Информация</a>
+                <a th:href="@{/users/id(id=${user.id})}">Информация</a>
                 <form th:action="@{/users/delete}" method="post" style="display:inline;">
                     <input type="hidden" th:value="${user.id}" name="id"/>
                     <button type="submit">Удалить</button>

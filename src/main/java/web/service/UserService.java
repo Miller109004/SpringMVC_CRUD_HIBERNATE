@@ -2,7 +2,6 @@ package web.service;
 
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
@@ -27,12 +26,20 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User update(User user) {
-        return userRepository.save(user);
+    public void update(User user, Long id) {
+        Optional<User> existingUser = userRepository.findById(id);
+        if(existingUser.isPresent()) {
+            User updatedUser = existingUser.get();
+            updatedUser.setName(user.getName());
+            updatedUser.setSurname(user.getSurname());
+            updatedUser.setAge(user.getAge());
+            updatedUser.setEmail(user.getEmail());
+            userRepository.save(updatedUser);
+        }
     }
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     public void delete(long id) {

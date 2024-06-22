@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Информация о пользователе</title>
+    <meta charset="UTF-8">
+    <title>Пользователь</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,34 +14,54 @@
         h1, h2 {
             color: #0056b3;
         }
-        .user-details {
+        .form-container {
             background-color: #fff;
             padding: 20px;
             border: 1px solid #ddd;
             margin-bottom: 20px;
         }
-        .user-details label {
+        .form-container label {
             display: block;
             margin-bottom: 8px;
         }
-        .user-details span {
-            display: block;
+        .form-container input {
+            width: 100%;
+            padding: 8px;
             margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003d80;
         }
     </style>
 </head>
 <body>
 <h1>Информация о пользователе</h1>
-<div class="user-details" th:if="${user != null}">
-    <label>Имя:</label>
-    <span th:text="${user.name}">Имя пользователя</span>
-    <label>Фамилия:</label>
-    <span th:text="${user.surname}">Фамилия пользователя</span>
-    <label>Возраст:</label>
-    <span th:text="${user.age}">Возраст пользователя</span>
-    <label>Почта:</label>
-    <span th:text="${user.email}">Почта пользователя</span>
+
+<div class="form-container">
+    <h2>Пользователь</h2>
+    <form th:action="@{/users/update}" th:object="${user}" method="post">
+        <input type="hidden" name="_method" value="patch"/>
+        <input type="hidden" th:value="${user.id}" name="id"/>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <label for="surname">Фамилия:</label>
+        <input type="text" id="surname" th:field="*{surname}" />
+        <label for="age">Возраст:</label>
+        <input type="number" id="age" th:field="*{age}" />
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" />
+        <button type="submit">Обновить</button>
+    </form>
+    <a href="/users">Назад к списку пользователей</a>
 </div>
-<a href="/users">Назад к списку пользователей</a>
+
 </body>
 </html>

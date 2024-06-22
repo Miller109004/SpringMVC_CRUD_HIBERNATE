@@ -8,6 +8,7 @@ import web.model.User;
 import web.service.UserService;
 
 
+
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -22,8 +23,8 @@ public class UserController {
         return "allUsers";
     }
 
-    @GetMapping("/byid")
-    public String getUserById(@RequestParam("id") long id, Model model) {
+    @GetMapping("/id")
+    public String getUserId(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getById(id).orElse(null));
         return "user";
     }
@@ -40,9 +41,9 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/update")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.update(user);
+    @PatchMapping("/update")
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam("id") long id) {
+        userService.update(user, id);
         return "redirect:/users";
     }
 
