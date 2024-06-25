@@ -1,49 +1,18 @@
 package web.service;
 
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import web.model.User;
-import web.repository.UserRepository;
+import web.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-@Transactional
-public class UserService {
+public interface UserService {
 
-    private final UserRepository userRepository;
+    List<User> getAllUsers();
 
+    User getUserById(long id);
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    void addUser(User user);
 
-    public Optional<User> getById(long id) {
-        return userRepository.findById(id);
-    }
+    void removeUser(long id);
 
-    public void update(User user, Long id) {
-        Optional<User> existingUser = userRepository.findById(id);
-        if(existingUser.isPresent()) {
-            User updatedUser = existingUser.get();
-            updatedUser.setName(user.getName());
-            updatedUser.setSurname(user.getSurname());
-            updatedUser.setAge(user.getAge());
-            updatedUser.setEmail(user.getEmail());
-            userRepository.save(updatedUser);
-        }
-    }
-
-    public void save(User user) {
-        userRepository.save(user);
-    }
-
-    public void delete(long id) {
-        userRepository.deleteById(id);
-    }
-
+    void updateUser(long id, User user);
 }

@@ -63,6 +63,10 @@
             margin-bottom: 10px;
             border: 1px solid #ddd;
         }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -102,24 +106,20 @@
     <h2>Добавить пользователя</h2>
     <form th:action="@{/users/add}" th:object="${user}" method="post">
         <label for="name">Имя:</label>
-        <input type="text" id="name" th:field="*{name}" />
+        <input type="text" id="name" th:field="*{name}">
+        <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         <label for="surname">Фамилия:</label>
-        <input type="text" id="surname" th:field="*{surname}" />
+        <input type="text" id="surname" th:field="*{surname}">
+        <span class="error-message" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
         <label for="age">Возраст:</label>
-        <input type="text" id="age" th:field="*{age}" />
+        <input type="number" id="age" th:field="*{age}">
+        <span class="error-message" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
         <label for="email">Почта:</label>
-        <input type="text" id="email" th:field="*{email}" />
-        <button type="submit">Сохранить</button>
+        <input type="text" id="email" th:field="*{email}">
+        <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <button type="submit">Добавить</button>
     </form>
-    <a href="/users">Назад</a>
 </div>
 
-<script>
-    function showSection(sectionId) {
-        document.getElementById('addForm').style.display = 'none';
-        document.getElementById('userList').style.display = 'none';
-        document.getElementById(sectionId).style.display = 'block';
-    }
-</script>
 </body>
 </html>
